@@ -1,6 +1,4 @@
-from Fedotov_Alexander import *
-from Kalimullin_Roman import *
-from Tarasov_Kostya import *
+from resultant_m1 import *
 
 # Z-2
 # Определение положительности числа (2 - положительное, 0 - равное нулю, 1 - отрицательное)
