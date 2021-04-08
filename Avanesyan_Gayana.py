@@ -1,5 +1,5 @@
 from resultant_m1 import *
-
+from resultant_m2 import *
 # Z-2
 # Определение положительности числа (2 - положительное, 0 - равное нулю, 1 - отрицательное)
 def POZ_Z_D(A):
