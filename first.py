@@ -1,4 +1,6 @@
 from Tarasov_Kostya import COM_NN_D
+
+#Добавление единицы к натуральному N-3
 def ADD_1N_N(A, n):
     k = n - 1
     while A[k] == 9:
@@ -11,6 +13,9 @@ def ADD_1N_N(A, n):
             k -= 1
     A[k] += 1
     return A
+
+
+#Сложение натуральных чисел N-4
 def ADD_NN_N(A, B):
     if COM_NN_D(A, B) == 2:
         C = B
