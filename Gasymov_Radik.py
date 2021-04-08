@@ -1,5 +1,5 @@
-from Fedotov_Alexander import *
-from Tarasov_Kostya import *
+from resultant_m1 import *
+from resultant_m2 import *
 #Z-3
 #Умножение целого на -1.
 #Алгоритм проверяет, если число положительное, то есть первый индекс массива равно нулю, то заменяем на противоположный знак, иначе ничего не меняем.
