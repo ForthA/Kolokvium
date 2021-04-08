@@ -1,4 +1,5 @@
-from Tarasov_Kostya import COM_NN_D
+from resultant_m1 import *
+from resultant_m2 import *
 
 #N-3
 #Добавление 1 к натуральному числу:
