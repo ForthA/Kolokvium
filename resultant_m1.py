@@ -86,8 +86,6 @@ def SUB_NN_N(A, B):
     for i in range(0, k, 1):
         B.append(0)
     B.reverse()
-    print(A)
-    print(B)
     for i in range(len(B) - 1, -1, -1):
         if A[i] >= B[i]:
             A[i] = A[i] - B[i]
