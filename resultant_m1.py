@@ -19,9 +19,9 @@ def COM_NN_D(A, B):
 # N - 2 Проверка на ноль, если ноль - нет, если не ноль - да
 def NZER_N_B(A):
     if A[0] != 0:
-        print("Да")
+        return 'Да'
     else:
-        print("Нет")
+        return 'Нет'
 
 
 # N-3
@@ -151,7 +151,8 @@ def MUL_NN_N(A, B):
         c = MUL_Nk_N(list(map(int, c)), i)
         # добавляем к результату
         p = ADD_NN_N(list(map(int, p)), list(map(int, c)))
-    del p[0]
+    if p[0] == 0:
+        del p[0]
     return p
 
 
