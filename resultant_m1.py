@@ -246,3 +246,30 @@ def MOD_NN_N(A, B):
                 j -= 1
         i += 1
     return num1
+
+
+
+# N-13
+# НОД натуральных чисел
+# Если одно число больше другого -> меняем местами
+# Находим остатки от деления пока B не станет = 0
+def GCF_NN_N(A, B):
+    if COM_NN_D(A, B) == 0:
+        return A
+    if COM_NN_D(A, B) == 1:
+        A, B = B, A
+    if NZER_N_B(B) == 'Нет':
+        return A
+    else:
+        A = MOD_NN_N(A, B)
+        return GCF_NN_N(A, B)
+
+    
+# N - 14
+# НОК натуральных чисел
+# Делим произведение А и В на их НОД
+def LCM_NN_N(A, B):
+    GCF = GCF_NN_N(A, B)
+    MUL = MUL_NN_N(A, B)
+    return DIV_NN_N(MUL, GCF)    
+    
