@@ -1,4 +1,4 @@
-# Сравнение чисел, если первое больше второго вывод - 2, если второе больше - 1,равны - 0
+# N - 1 Сравнение чисел, если первое больше второго вывод - 2, если второе больше - 1,равны - 0
 def COM_NN_D(A, B):
     i = 0
     if len(A) > len(B):
@@ -16,7 +16,7 @@ def COM_NN_D(A, B):
             i += 1
 
 
-# Проверка на ноль, если ноль - нет, если не ноль - да
+# N - 2 Проверка на ноль, если ноль - нет, если не ноль - да
 def NZER_N_B(A):
     if A[0] != 0:
         print("Да")
@@ -175,21 +175,73 @@ def SUB_NDN_N(A, B, n):
 # Преобразование массивов в числа, перемещение большего числа на первое место,
 # нахождение самого числа, ее позиции и результата.
 def DIV_NN_Dk(A, B, k):
-    i = 1
     count = 1
-    flag = False
     if COM_NN_D(A, B) == 1:
-        temp = A
-        A = B
-        B = temp
-    MUL_Nk_N(A, k)
-    while COM_NN_D(A[0:i], B) == 1:
+        return 0
+    else:
+        tm = MUL_Nk_N(B, k)
+        temp = tm.copy()
+        while COM_NN_D(A, MUL_ND_N(temp, count)) != 1:
+            count += 1
+            temp = tm.copy()
+        return count - 1
+    
+    
+# N-11 Частное от деления натуральных чисел
+def DIV_NN_N(A, B):
+    i = 0
+    j = 0
+
+    num1 = A.copy()
+    num2 = B.copy()
+    num3 = [0] * len(A)
+    while COM_NN_D(num1, num2) != 1:
+        count = 0
+        while COM_NN_D(num1[0:count], num2) == 1:
+            count += 1
+            if (count > (j + 1)) & (i > 0):
+                num3[i] = 0
+                i += 1
+        num3[i] = DIV_NN_Dk(num1[0:count], num2, 0)
+        temp = num2.copy()
+        temp1 = SUB_NDN_N(num1[0:count], temp, num3[i])
+        num1[0:count] = temp1.copy()
+        j = len(temp1)
+        while num1[0] == 0:
+            if len(num1) == 1:
+                break
+            else:
+                num1.remove(0)
+                j -= 1
         i += 1
-    tm = B.copy()
-    while COM_NN_D(A[0:i], MUL_ND_N(tm, count)) == 2:
-        count += 1
-        tm = B.copy()
-        flag = True
-    if flag:
-        count -= 1
-    return count
+    return num3[0:i]
+
+
+# N-12 Остаток от деления
+def MOD_NN_N(A, B):
+    i = 0
+    j = 0
+
+    num1 = A.copy()
+    num2 = B.copy()
+    num3 = [0] * len(A)
+    while COM_NN_D(num1, num2) != 1:
+        count = 0
+        while COM_NN_D(num1[0:count], num2) == 1:
+            count += 1
+            if (count > (j + 1)) & (i > 0):
+                num3[i] = 0
+                i += 1
+        num3[i] = DIV_NN_Dk(num1[0:count], num2, 0)
+        temp = num2.copy()
+        temp1 = SUB_NDN_N(num1[0:count], temp, num3[i])
+        num1[0:count] = temp1.copy()
+        j = len(temp1)
+        while num1[0] == 0:
+            if len(num1) == 1:
+                break
+            else:
+                num1.remove(0)
+                j -= 1
+        i += 1
+    return num1
