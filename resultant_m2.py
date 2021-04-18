@@ -88,3 +88,91 @@ def ADD_ZZ_Z(A, B):
             if BZ == 1:
                 result = MUL_ZM_Z(result)
     return result
+
+
+
+# Z-7
+# Вычитание целых чисел
+# Рассматриваем 4 случая. Когда оба числа положительные. Если первое число больше второго, то преобразуем эти числа в натуральные и находим разность. Полученное число будет иметь знак +, иначе число будет иметь знак -
+# Когда оба числа отрицательные. Если абсолютное значение первого числа будет больше абс. знач. 2-го числа, то полученное число будет иметь знак -, иначе +
+# Первое число положительное, второе-отрицательное. В этом случае складываем числа. Полученное значение будет иметь знак +
+# Первое число отрицательное, второе-положительное. В этом случае так же складываем числа, но полученное значение будет иметь знак -.
+def SUB_ZZ_Z(A, B):
+    res = 0
+    A1 = POZ_Z_D(A)
+    B1 = POZ_Z_D(B)
+    if ((A1 == B1) and (A1 == 2)):
+        a = ABS_Z_N(A)
+        b = ABS_Z_N(B)
+        res = SUB_NN_N(a, b)
+        if (COM_NN_D(a, b) == 1):
+            res.insert(0, 0)
+        else:
+            res.insert(0, 0)
+            res = MUL_ZM_Z(res)
+    elif ((A1 == B1) and (A1 == 1)):
+        a = ABS_Z_N(A)
+        b = ABS_Z_N(B)
+        res = SUB_NN_N(a, b)
+        if (COM_NN_D(a, b) == 2):
+            res.insert(0, 0)
+        else:
+            res.insert(0, 0)
+            res = MUL_ZM_Z(res)
+    elif ((A1 == B1) and (A1 == 0)):
+        res = 0
+    else:
+        a = ABS_Z_N(A)
+        b = ABS_Z_N(B)
+        if ((A1 == 2) and ((B1 == 1) or (B1 == 0))):
+            res = ADD_NN_N(a, b)
+
+        elif ((A1 == 1) and ((B1 == 2) or (B1 == 0))):
+            res = ADD_NN_N(a, b)
+            res = MUL_ZM_Z(res)
+        elif ((A1 == 0) and (B1 == 1)):
+            res = ADD_NN_N(a, b)
+            res = MUL_ZM_Z(res)
+        elif ((A1 == 0) and (B1 == 2)):
+            res = ADD_NN_N(a, b)
+    return res
+
+
+
+# Z-8
+# Умножение целых чисел
+def MUL_ZZ_Z(A, B):
+    result = 0
+    AZ = POZ_Z_D(A)
+    BZ = POZ_Z_D(B)
+    if (AZ == BZ):
+        a = ABS_Z_N(A)
+        b = ABS_Z_N(B)
+        result = MUL_NN_N(a,b)
+        del result[0]
+    elif ((AZ == 0) | (BZ == 0)):
+        result = 0
+    else:
+        a = ABS_Z_N(A)
+        b = ABS_Z_N(B)
+        result = MUL_NN_N(a,b)
+        del result[0]
+        result = MUL_ZM_Z(result)
+    return result
+
+
+
+
+# z-9 Частное от деления целых чисел
+
+def DIV_ZZ_Z(A, B):
+    num1 = A
+    num2 = B
+    num3 = DIV_NN_N(A[1:len(num1)],B[1:len(num2)])
+    num3.reverse()
+    num3.append(0)
+    num3.reverse()
+    if ((POZ_Z_D(num1) == 1) and (POZ_Z_D(num2) == 2)) or ((POZ_Z_D(num1) == 2) and (POZ_Z_D(num2) == 1)):
+        num3[0] = 1
+    return num3
+
