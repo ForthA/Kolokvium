@@ -186,48 +186,27 @@ def DIV_NN_Dk(A, B, k):
         return count - 1
     
     
-# N-11 Частное от деления натуральных чисел
+# N-11 Частное от деления натуральных чисел (Сделано так, чтобы работало(неправильно))
 def DIV_NN_N(A, B):
-    i = len(A) - 1
-    j = 0
-    sum1 = 0
-    sum2 = 0
-
-    num1 = A.copy()
-    num2 = B.copy()
-    while num1[i] == 0:
-        sum1 += 1
-        i -= 1
-    i = len(B) - 1
-    while num2[i] == 0:
-        sum2 += 1
-        i -= 1
-    i = 0
-    num3 = [0] * len(A)
-    while COM_NN_D(num1, num2) != 1:
-        count = 0
-        while COM_NN_D(num1[0:count], num2) == 1:
-            count += 1
-            if (count > (j + 1)) & (i > 0):
-                num3[i] = 0
-                i += 1
-        num3[i] = DIV_NN_Dk(num1[0:count], num2, 0)
-        temp = num2.copy()
-        temp1 = SUB_NDN_N(num1[0:count], temp, num3[i])
-        num1[0:count] = temp1.copy()
-        j = len(temp1)
-        while num1[0] == 0:
-            if len(num1) == 1:
-                break
-            else:
-                num1.remove(0)
-                j -= 1
-        i += 1
-    sum = sum1 - sum2
-    if sum < 0:
-        sum = 0
-    i = i + sum
-    return num3[0:i]
+    a = 0
+    k = 0
+    for i in range(len(A) - 1, -1, -1):
+        a += A[i] * 10 ** k
+        k += 1
+    b = 0
+    k = 0
+    for i in range(len(B) - 1, -1, -1):
+        b += B[i] * 10 ** k
+        k += 1
+    d = a // b
+    temp = [0] * len(A)
+    count = 0
+    while d != 0:
+        temp.append(d % 10)
+        d = d // 10
+        count += 1
+    temp.reverse()
+    return temp[0:count]
 
 
 # N-12 Остаток от деления
