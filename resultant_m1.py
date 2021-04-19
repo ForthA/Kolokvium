@@ -188,21 +188,11 @@ def DIV_NN_Dk(A, B, k):
     
 # N-11 Частное от деления натуральных чисел
 def DIV_NN_N(A, B):
-    i = len(A) - 1
+    i = 0
     j = 0
-    sum1 = 0
-    sum2 = 0
 
     num1 = A.copy()
     num2 = B.copy()
-    while num1[i] == 0:
-        sum1 += 1
-        i -= 1
-    i = len(B) - 1
-    while num2[i] == 0:
-        sum2 += 1
-        i -= 1
-    i = 0
     num3 = [0] * len(A)
     while COM_NN_D(num1, num2) != 1:
         count = 0
@@ -223,10 +213,6 @@ def DIV_NN_N(A, B):
                 num1.remove(0)
                 j -= 1
         i += 1
-    sum = sum1 - sum2
-    if sum < 0:
-        sum = 0
-    i = i + sum
     return num3[0:i]
 
 
