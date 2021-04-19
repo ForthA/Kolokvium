@@ -138,7 +138,6 @@ def SUB_ZZ_Z(A, B):
     return res
 
 
-
 # Z-8
 # Умножение целых чисел
 def MUL_ZZ_Z(A, B):
@@ -149,14 +148,16 @@ def MUL_ZZ_Z(A, B):
         a = ABS_Z_N(A)
         b = ABS_Z_N(B)
         result = MUL_NN_N(a,b)
-        del result[0]
+        if result[0] == 0 and result[1] == 0:
+            del result[0]
     elif ((AZ == 0) | (BZ == 0)):
         result = 0
     else:
         a = ABS_Z_N(A)
         b = ABS_Z_N(B)
         result = MUL_NN_N(a,b)
-        del result[0]
+        if result[0] == 0 and result[1] == 0:
+            del result[0]
         result = MUL_ZM_Z(result)
     return result
 
@@ -176,3 +177,24 @@ def DIV_ZZ_Z(A, B):
         num3[0] = 1
     return num3
 
+
+
+
+
+
+#Z-10
+#Остаток от деления целого на целое(делитель отличен от нуля)
+#1)При положительных числах и при делителе(B) < 0: находим частное от деления и вычитаем от A произвение частного на B
+#2)При делимом(А) < 0 и длителе(В) > 0: вычитаем из А В, чтобы при нахождении частного получить на 1 больше =>
+# остаток > 0
+#3)При делимом(А) < 0 и длителе(В) < 0: меняем знак у B и вычитаем из А В (-А - (В)) => получем частное на 1 больше =>
+# остаток > 0
+def MOD_ZZ_Z(A, B):
+    if ((A[0] == 0) and (B[0] == 1)) or ((A[0] == 0) and (B[0] == 0)):
+        return SUB_ZZ_Z(A, MUL_ZZ_Z(B, DIV_ZZ_Z(A, B)))
+    if ((A[0] == 1) and (B[0] == 0)) or ((A[0] == 1) and (B[0] == 1)):
+        Rev = B
+        if (A[0] == 1) and (B[0] == 1):
+            Rev = MUL_ZM_Z(B)
+        inDiv = DIV_ZZ_Z(SUB_ZZ_Z(A, Rev), B)
+        return SUB_ZZ_Z(A, MUL_ZZ_Z(inDiv, B))
