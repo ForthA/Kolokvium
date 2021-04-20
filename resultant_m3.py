@@ -15,6 +15,16 @@ def INT_Q_B(A, B):
         return True
     else:
         return False
+    
+    
+#Q-3
+#Преобразование целого в дробное
+#Заносим целое число в двумерный массив
+def TRANS_Z_Q(A):
+    s=[A,[1]]
+    return s
+
+
 
 # Еще не готово
 # Q - 5
