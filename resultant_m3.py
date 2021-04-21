@@ -24,7 +24,24 @@ def TRANS_Z_Q(A):
     s=[A,[1]]
     return s
 
-
+#Q-4
+#Считаем количество элементов и нулевых элементов в знаменателе,
+#если их количества совпадают и последний элемент знаменателя равен нулю,
+#то возвращаем только числитель
+def TRANS_Q_Z(A):
+    count = 0
+    num = 0
+    flag = 0
+    for i in range (len(A[1])):
+        if (A[1][i] == 0):
+            count = count + 1
+        num = num + 1
+        
+    if ((count == num - 1) and (A[1][count] == 1)):
+            flag = 1
+            
+    if (flag == 1):
+        return A[0]
 
 # Еще не готово
 # Q - 5
@@ -36,6 +53,32 @@ def ADD_QQ_Q(A, B, C, D):
     sum1 = MUL_ZZ_Z(A, TRANS_N_Z(D))
     sum2 = MUL_ZZ_Z(TRANS_N_Z(B), C)
     return ADD_ZZ_Z(sum1, sum2), sum3
+
+
+
+
+#Q-7
+#Умножение дробей:
+# знаменатель -> целое
+# умножение знаменателей и числителей
+# знаменатель -> натуральное
+# вывод дроби
+def MUL_QQ_Q(Q01, Q02):
+    A1 = Q01[0][:]
+    B1 = Q01[1][:]
+    A2 = Q02[0][:]
+    B2 = Q02[1][:]
+
+    B1 = TRANS_N_Z(B1)
+    B2 = TRANS_N_Z(B2)
+
+    A = MUL_ZZ_Z(A1, A2)
+    B = MUL_ZZ_Z(B1, B2)
+
+    B = TRANS_Z_N(B)
+    Q = [A, B]
+    return Q
+
 
 
 # Q-8
