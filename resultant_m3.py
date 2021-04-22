@@ -54,7 +54,28 @@ def ADD_QQ_Q(A, B, C, D):
     sum2 = MUL_ZZ_Z(TRANS_N_Z(B), C)
     return ADD_ZZ_Z(sum1, sum2), sum3
 
+#Q-6
+#Вычитание дробей
+#Находим НОК знаменателей, потом домножаем числители и вычитаем из первого второй
 
+def SUB_QQ_Q(Q01, Q02):
+    A1 = Q01[0][:]
+    A2 = Q01[1][:]
+    B1 = Q02[0][:]
+    B2 = Q02[1][:]
+    NOK = LCM_NN_N(A2, B2)
+    A2.reverse()
+    A2.append(0)
+    A2.reverse()
+    B2.reverse()
+    NOK.reverse()
+    NOK.append(0)
+    NOK.reverse()
+    numeratorA = MUL_ZZ_Z(DIV_ZZ_Z(NOK, A2), A1)
+    numeratorB = MUL_ZZ_Z(DIV_ZZ_Z(NOK, B2), B1)
+    del NOK[0]
+    Q = [SUB_ZZ_Z(numeratorA, numeratorB), NOK]
+    return Q
 
 
 #Q-7
