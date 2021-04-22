@@ -62,8 +62,8 @@ def TRANS_Q_Z(A):
             
     if (flag == 1):
         return A[0]
-
-# Еще не готово
+    
+   
 # Q - 5
 # Сложение дробей
 def ADD_QQ_Q(A, B, C, D):
@@ -72,7 +72,9 @@ def ADD_QQ_Q(A, B, C, D):
     sum3 = MUL_NN_N(tempB, tempD)
     sum1 = MUL_ZZ_Z(A, TRANS_N_Z(D))
     sum2 = MUL_ZZ_Z(TRANS_N_Z(B), C)
-    return ADD_ZZ_Z(sum1, sum2), sum3
+    temp = ADD_ZZ_Z(sum1, sum2)
+    temp1, temp2 = RED_Q_Q([temp, sum3])
+    return temp1, temp2
 
 #Q-6
 #Вычитание дробей
