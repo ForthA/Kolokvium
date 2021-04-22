@@ -62,30 +62,34 @@ def ADD_ZZ_Z(A, B):
     result = 0
     AZ = POZ_Z_D(A)
     BZ = POZ_Z_D(B)
-    if (AZ == BZ) & (AZ == 1):
-        a = ABS_Z_N(A)
-        b = ABS_Z_N(B)
+    if ((AZ == BZ) & (AZ == 1)):
+        a = A[1:]
+        b = B[1:]
         result = ADD_NN_N(a, b)
+        result.insert(0,0)
         result = MUL_ZM_Z(result)
-    elif (AZ == BZ) & (AZ == 2):
-        a = ABS_Z_N(A)
-        b = ABS_Z_N(B)
+    elif ((AZ == BZ) & (AZ == 2)):
+        a = A[1:]
+        b = B[1:]
         result = ADD_NN_N(a, b)
-    elif (AZ == BZ) & (AZ == 0):
+        result.insert(0,0)
+    elif ((AZ == BZ) & (AZ == 0)):
         result = 0
-    else:
+    else: 
         a = ABS_Z_N(A)
         b = ABS_Z_N(B)
         raz = COM_NN_D(a, b)
-        if raz == 2:
+        if (raz == 2):
             result = SUB_NN_N(a, b)
-            if AZ == 1:
-                result.insert(0, 0)
+            if (AZ == 1):
+                result.insert(0,0)
                 result = MUL_ZM_Z(result)
+            else:
+                result.insert(0,0)
         else:
             result = SUB_NN_N(b, a)
-            result.insert(0, 0)
-            if BZ == 1:
+            result.insert(0,0)
+            if (BZ == 1):
                 result = MUL_ZM_Z(result)
     return result
 
