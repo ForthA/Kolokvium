@@ -58,3 +58,31 @@ def MUL_Pxk_P(arr, k):
     for i in range(0, k):
         arr.append(C([0, 0], [0]))
     return arr
+
+
+#P-7
+#Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей
+#Чтобы найти НОД чисел, сначала нужно найти НОД двух первых чисел, потом находим НОД вот таким образом, НОД(НОД двух предыдущих чисел, следующее число)
+#Чтобы найти НОК чисел, сначала нужно найти НОК двух первых чисел, потом находим НОК вот таким образом, НОК(НОК двух предыдущих чисел, следующее число)
+
+def FAC_P_Q(arr,m):
+    nok=[]
+    nod=[]
+    for i in range(0,m+1):
+        if(POZ_Z_D(arr[i].A)==1):
+            arr[i].A=ABS_Z_N(arr[i].A)
+        else:
+            arr[i].A=TRANS_Z_N(arr[i].A)
+    if(m==0):
+        nod=arr[i].A
+        nok=arr[i].B
+    else:
+        for i in range(0,m+1):
+            if(i==0):
+                nod=GCF_NN_N(arr[i].A,arr[i+1].A)
+                nok=LCM_NN_N(arr[i].B,arr[i+1].B)
+            else:
+                if(i<m):
+                    nod=GCF_NN_N(nod,arr[i+1].A)
+                    nok=LCM_NN_N(nok,arr[i+1].B)
+    return TRANS_N_Z(nod),nok
