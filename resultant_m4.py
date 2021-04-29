@@ -42,6 +42,72 @@ def ADD_PP_P(arr,m, arr1,n):
         return arr1
 
 
+    
+#P - 2
+#Вычитание многочленов
+def SUB_PP_P(arr, m, arr1, n):
+    if(m >= n):
+        
+        array1 = []
+        array2 = []
+            
+        p = m
+        raz = m - n
+        
+        for i in range(0, m+1):
+            if(p > n):
+                arr[i] = arr[i].A,arr[i].B
+                p = p - 1
+            else:
+                if(m > n):
+                    array1.clear()
+                    array2.clear()
+                    array1.append(arr[i].A)
+                    array1.append(arr[i].B)
+                    array2.append(arr1[i-raz].A)
+                    array2.append(arr1[i-raz].B)
+                    arr[i] = SUB_QQ_Q(array1, array2)
+                else:
+                    array1.clear()
+                    array2.clear()
+                    array1.append(arr[i].A)
+                    array1.append(arr[i].B)
+                    array2.append(arr1[i-raz].A)
+                    array2.append(arr1[i-raz].B)
+                    arr[i] = SUB_QQ_Q(array1, array2)
+                     
+        return arr
+         
+    else:
+        array1 = []
+        array2 = []
+            
+        q = n
+        raz = n - m
+        
+        for i in range(0, n+1):
+            if(q > m):
+                arr1[i] = arr1[i].A,arr1[i].B
+                q = q - 1
+            else:
+                if(n > m):
+                    array1.clear()
+                    array2.clear()
+                    array1.append(arr[i].A)
+                    array1.append(arr[i].B)
+                    array2.append(arr1[i-raz].A)
+                    array2.append(arr1[i-raz].B)
+                    arr1[i] = SUB_QQ_Q(array1, array2)
+                else:
+                    array1.clear()
+                    array2.clear()
+                    array1.append(arr[i].A)
+                    array1.append(arr[i].B)
+                    array2.append(arr1[i-raz].A)
+                    array2.append(arr1[i-raz].B)
+                    arr1[i] = SUB_QQ_Q(array1, array2)
+                    
+        return arr1    
 
 # P - 3
 # Умножение коэфа с многочленом
