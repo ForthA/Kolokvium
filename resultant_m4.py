@@ -152,3 +152,30 @@ def FAC_P_Q(arr,m):
                     nod=GCF_NN_N(nod,arr[i+1].A)
                     nok=LCM_NN_N(nok,arr[i+1].B)
     return TRANS_N_Z(nod),nok
+
+
+
+# P-12
+# Производная многочлена
+# m - степень переводим в список, т.к степнь может быть числом(для олее простого умножения)
+# забираем знак у числителя и умножаем его на степень
+# del result[len(result)-1] нужен для удаления нуля в конце после функции MUL_NN_N
+# Возвращаем знак числителю и минусуем 1 от степени
+def DER_P_P(arr, m):
+    tmp = m
+    result = []
+    while m > 0:
+        result.append(m % 10)
+        m //= 10
+    result.reverse()
+    for i in range(0, tmp):
+        sign = arr[i].A[0]
+        del arr[i].A[0]
+        section = MUL_NN_N(arr[i].A, result)
+        del result[len(result)-1]
+        section.reverse()
+        section.append(sign)
+        section.reverse()
+        arr[i].A = section
+        result = SUB_NN_N(result, [1])
+    return arr
