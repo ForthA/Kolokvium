@@ -60,37 +60,37 @@ def TRANS_Z_N(A):
 # Сложение целых чисел
 def ADD_ZZ_Z(A, B):
     result = 0
-    AZ = POZ_Z_D(A)
+    AZ = POZ_Z_D(A) #Определение положительности
     BZ = POZ_Z_D(B)
-    if ((AZ == BZ) & (AZ == 1)):
+    if ((AZ == BZ) & (AZ == 1)): #Если они оба отрицательные
+        a = A[1:]
+        b = B[1:]
+        result = ADD_NN_N(a, b) #Сложение натуральных
+        result.insert(0,0) #Добавляем ячейку для знака
+        result = MUL_ZM_Z(result) #Делаем отрицательным
+    elif ((AZ == BZ) & (AZ == 2)): #Если они оба положительны
         a = A[1:]
         b = B[1:]
         result = ADD_NN_N(a, b)
         result.insert(0,0)
-        result = MUL_ZM_Z(result)
-    elif ((AZ == BZ) & (AZ == 2)):
-        a = A[1:]
-        b = B[1:]
-        result = ADD_NN_N(a, b)
-        result.insert(0,0)
-    elif ((AZ == BZ) & (AZ == 0)):
+    elif ((AZ == BZ) & (AZ == 0)): #Если они оба равны нулю
         result = 0
-    else: 
-        a = ABS_Z_N(A)
+    else: #Если они разных знаков
+        a = ABS_Z_N(A) #Делаем натуральным
         b = ABS_Z_N(B)
-        raz = COM_NN_D(a, b)
-        if (raz == 2):
-            result = SUB_NN_N(a, b)
-            if (AZ == 1):
+        raz = COM_NN_D(a, b) #Сравниваем по величине
+        if (raz == 2): #Если первое больше второго
+            result = SUB_NN_N(a, b) #Вычитаем
+            if (AZ == 1): #Если первое отрицательное
                 result.insert(0,0)
-                result = MUL_ZM_Z(result)
+                result = MUL_ZM_Z(result) #Делаем отрицательным
             else:
                 result.insert(0,0)
         else:
             result = SUB_NN_N(b, a)
             result.insert(0,0)
-            if (BZ == 1):
-                result = MUL_ZM_Z(result)
+            if (BZ == 1): #Если второе отрицательное
+                result = MUL_ZM_Z(result) #Делаем отрицательным
     return result
 
 
