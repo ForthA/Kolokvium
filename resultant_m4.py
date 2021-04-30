@@ -122,7 +122,7 @@ def MUL_PQ_P(arr, D):
 #Добавляем элементы [0, 0],[0], чтобы понимать сколько до конца многочлена
 def MUL_Pxk_P(arr, k):
     for i in range(0, k):
-        arr.append(C([0, 0], [0]))
+        arr.append(C([0, 0], [1]))
     return arr
 
 # P-6
