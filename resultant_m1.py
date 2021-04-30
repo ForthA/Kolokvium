@@ -188,25 +188,17 @@ def DIV_NN_Dk(A, B, k):
     
 # N-11 Частное от деления натуральных чисел (Сделано так, чтобы работало(неправильно))
 def DIV_NN_N(A, B):
-    a = 0
+    temp = B.copy()
     k = 0
-    for i in range(len(A) - 1, -1, -1):
-        a += A[i] * 10 ** k
+    while COM_NN_D(A, B) != 1:
+        SUB_NN_N(A, B)
+        B = temp.copy()
         k += 1
-    b = 0
-    k = 0
-    for i in range(len(B) - 1, -1, -1):
-        b += B[i] * 10 ** k
-        k += 1
-    d = a // b
-    temp = [0] * len(A)
-    count = 0
-    while d != 0:
-        temp.append(d % 10)
-        d = d // 10
-        count += 1
-    temp.reverse()
-    return temp[0:count]
+    s = str(k)
+    count = [0] * len(s)
+    for i in range(0, len(s)):
+        count[i] = int(s[i])
+    return count
 
 
 # N-12 Остаток от деления
