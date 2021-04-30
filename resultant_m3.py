@@ -134,7 +134,12 @@ def DIV_QQ_Q(A, B, C, D):
     C1 = D.copy()
     D = C.copy()
     C = C1.copy()
+    temp = D[0]
     numer = MUL_ZZ_Z(A, TRANS_N_Z(C))
-    denom = MUL_NN_N(B, TRANS_Z_N(D))
+    denom = MUL_NN_N(B, TRANS_Z_N(ABS_Z_N(D)))
+    if (numer[0] == 1) & (temp == 1):
+        numer[0] = 0
+    elif (numer[0] == 0) & (temp == 1):
+        numer[0] = 1
     return numer, denom
 
