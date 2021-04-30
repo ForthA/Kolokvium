@@ -170,7 +170,7 @@ def FAC_P_Q(arr,m):
                     nok=LCM_NN_N(nok,arr[i+1].B)
     return TRANS_N_Z(nod),nok
 
-#P-10
+'''#P-10
 #Остаток от деления многочлена на многочлен при делении с остатком
 def MOD_PP_P(arr,m, arr1,n):
     chas = DIV_PP_P(arr,m, arr1,n) #Находим частное от деления двух многочленов 
@@ -230,4 +230,4 @@ def DER_P_P(arr, m):
         section.reverse()
         arr[i].A = section
         result = SUB_NN_N(result, [1])
-    return arr
+    return arr '''
