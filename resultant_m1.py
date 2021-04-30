@@ -189,12 +189,11 @@ def DIV_NN_Dk(A, B, k):
     
     
 # N-11 Частное от деления натуральных чисел
-# Отнимаем от A B пока B не будет больше А
 def DIV_NN_N(A, B):
     temp = B.copy()
     k = 0
-    while COM_NN_D(A, B) != 1:
-        SUB_NN_N(A, B)
+    while COM_NN_D(A, B) != 1: # Пока первой больше второго
+        SUB_NN_N(A, B) # Вычитаем эти числа
         B = temp.copy()
         k += 1
     s = str(k)
@@ -205,7 +204,6 @@ def DIV_NN_N(A, B):
 
 
 # N-12 Остаток от деления
-# Выполняем деление столбиком, когда B станет больше A - А - остаток
 def MOD_NN_N(A, B):
     i = 0
     j = 0
@@ -213,16 +211,16 @@ def MOD_NN_N(A, B):
     num1 = A.copy()
     num2 = B.copy()
     num3 = [0] * len(A)
-    while COM_NN_D(num1, num2) != 1:
+    while COM_NN_D(num1, num2) != 1:  # Пока первое больше второго
         count = 0
-        while COM_NN_D(num1[0:count], num2) == 1:
+        while COM_NN_D(num1[0:count], num2) == 1:  # Сколько цифр в числе должны взять для вычитания
             count += 1
             if (count > (j + 1)) & (i > 0):
                 num3[i] = 0
                 i += 1
-        num3[i] = DIV_NN_Dk(num1[0:count], num2, 0)
+        num3[i] = DIV_NN_Dk(num1[0:count], num2, 0) # Вычисляем цифру деления
         temp = num2.copy()
-        temp1 = SUB_NDN_N(num1[0:count], temp, num3[i])
+        temp1 = SUB_NDN_N(num1[0:count], temp, num3[i]) # Вычитаем
         num1[0:count] = temp1.copy()
         j = len(temp1)
         while num1[0] == 0:
