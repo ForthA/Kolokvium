@@ -178,6 +178,34 @@ def MOD_PP_P(arr,m, arr1,n):
     res = SUB_PP_P(arr, m, k, n) #Вычитаем из первого исходного многочлена произведение частного на второй
     return res
 
+#P-11
+#НОД многочленов
+#Если степень 1-го многочлена меньше второго (m<n), то создаем два массива, где присваиваем arr2 присваиваем arr1-это второй многочлен, arr3 присваиваем arr-это первый многочлен
+#Находим остаток от деления двух многочленов
+#Пока степень полученного многочлена больше нуля, то к arr2 присваиваем arr3, а к arr3 остаток, исли остаток равен нулю, то выводим arr3 
+def GCF_PP_P(arr,m,arr1,n):
+    if(m<n):
+        arr2=[C]*(n+1)
+        arr2=arr1
+        arr3=[C]*(m+1)
+        arr3=arr
+        r=MOD_PP_P(arr2,n,arr3,m)
+        while(DEG_P_N(r,(n-m))>0):
+            arr2=arr3
+            arr3=r
+        return arr3
+            r=MOD_PP_P(arr2,n,arr3,m)
+    else:
+        arr2=[C]*(m+1)
+        arr2=arr
+        arr3=[C]*(n+1)
+        arr3=arr1
+        r=MOD_PP_P(arr3,m,arr2,n)
+        while(DEG_P_N(r,(n-m))>0):
+            arr3=arr2
+            arr2=r
+            r=MOD_PP_P(arr3,m,arr2,n)
+        return arr2
 
 # P-12
 # Производная многочлена
