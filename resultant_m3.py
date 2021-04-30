@@ -24,12 +24,12 @@ def RED_Q_Q(Q0):
 # Q-2
 # Проверка на целое, если рациональное число является целым, то <да>, иначе <нет>
 def INT_Q_B(A, B):
-    A = A[1:]
-    nod = GCF_NN_N(A, B)
-    d = DIV_NN_N(B, nod)
+    A = A[1:] #Числитель натуральное число
+    nod = GCF_NN_N(A, B) #Находи НОД числителя и знаменателя 
+    d = DIV_NN_N(B, nod) #Находим частное
     x = [1]
     y = [0]
-    if COM_NN_D(A, y) == 0:
+    if COM_NN_D(A, y) == 0: #Если числитель равен нулю
         return True
     if COM_NN_D(d, x) == 0:
         return True
@@ -131,13 +131,13 @@ def DIV_QQ_Q(A, B, C, D):
     C1 = []
     numer = []
     denom = []
-    C1 = D.copy()
-    D = C.copy()
+    C1 = D.copy() #Копируем в С1 знаменатель второй дроби
+    D = C.copy() #Переворачиваем вторую дробь
     C = C1.copy()
     temp = D[0]
-    numer = MUL_ZZ_Z(A, TRANS_N_Z(C))
-    denom = MUL_NN_N(B, TRANS_Z_N(ABS_Z_N(D)))
-    if (numer[0] == 1) & (temp == 1):
+    numer = MUL_ZZ_Z(A, TRANS_N_Z(C)) #Перемножаем числители
+    denom = MUL_NN_N(B, TRANS_Z_N(ABS_Z_N(D))) #Перемножаем знаменатели
+    if (numer[0] == 1) & (temp == 1): # Обрабатываем случай с отрицательными дробями
         numer[0] = 0
     elif (numer[0] == 0) & (temp == 1):
         numer[0] = 1
