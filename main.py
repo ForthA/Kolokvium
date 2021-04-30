@@ -65,9 +65,15 @@ def clicked():
             s += str(temp[i])
         txt13.insert(0, s)
     elif selected.get() == 9:
-        print()
+        temp = SUB_NDN_N(A, B, B[len(B) - 1])
+        s = ''
+        for i in range(0, len(temp)):
+            s += str(temp[i])
+        txt13.insert(0, s)
     elif selected.get() == 10:
-        print()
+        temp = DIV_NN_Dk(A, B, 0)
+
+        txt13.insert(0, str(temp))
     elif selected.get() == 11:
         temp = DIV_NN_N(A, B)
         print(temp)
@@ -152,9 +158,27 @@ def clicked2():
                 s += str(temp[i])
         txt23.insert(0, s)
     elif selected.get() == 4:
-        print()
+        temp = A.copy()
+        s = ''
+        if temp[0] == 1:
+            s += '-'
+            for i in range(1, len(temp)):
+                s += str(temp[i])
+        else:
+            for i in range(1, len(temp)):
+                s += str(temp[i])
+        txt23.insert(0, s)
     elif selected.get() == 5:
-        print()
+        temp = A.copy()
+        s = ''
+        if temp[0] == 1:
+            for i in range(1, len(temp)):
+                s += str(temp[i])
+            txt23.insert(0, s[0:len(temp)])
+        else:
+            for i in range(0, len(temp)):
+                s += str(temp[i])
+            txt23.insert(0, s[1:len(temp)])
     elif selected.get() == 6:
         temp = ADD_ZZ_Z(A, B)
         s = ''
@@ -274,9 +298,27 @@ def clicked3():
             s = "Нет"
         txt33.insert(0, s)
     elif selected.get() == 3:
-        print()
+        temp = A.copy()
+        s = ''
+        if temp[0] == 1:
+            s += '-'
+            for i in range(1, len(temp)):
+                s += str(temp[i])
+        else:
+            for i in range(1, len(temp)):
+                s += str(temp[i])
+        txt33.insert(0, s + "/1")
     elif selected.get() == 4:
-        print()
+        temp = TRANS_Q_Z([A, B])
+        s = ''
+        if temp[0] == 1:
+            s += '-'
+            for i in range(1, len(temp)):
+                s += str(temp[i])
+        else:
+            for i in range(1, len(temp)):
+                s += str(temp[i])
+        txt33.insert(0, s)
     elif selected.get() == 5:
         temp1, temp2 = ADD_QQ_Q(A, B, C, D)
         s = ''
@@ -366,7 +408,8 @@ def clicked4():
         for i in range(0, len(temp2)):
             B[i] = int(temp2[i])
         arr[j] = C(A, B)
-        del s1[0:s1.find("/")]
+        s1 = s1[s1.find(" ") + 1:]
+        j += 1
     temp1 = s1[0:s1.find("/")]
     temp2 = s1[s1.find("/") + 1:len(s1)]
     A = [0] * len(temp1)
@@ -384,14 +427,108 @@ def clicked4():
     for i in range(0, len(temp2)):
         B[i] = int(temp2[i])
     arr[j] = C(A, B)
-    for i in range(0, len(arr)):
-        print(arr[i].A)
-        print(arr[i].B)
     arr1 = [C] * (n + 1)
-    temp1 = s1[0:s1.find("/")]
-    temp2 = s1[s1.find("/") + 1:len(s1)]
+    j = 0
+    while s2.find(" ") != -1:
+        temp1 = s2[0:s2.find("/")]
+        temp2 = s2[s2.find("/") + 1:s2.find(" ")]
+        A = []
+        B = []
+        A = [0] * len(temp1)
+        B = [0] * len(temp2)
+        if temp1[0] == '-':
+            A[0] = 1
+            for i in range(1, len(temp1)):
+                A[i] = int(temp1[i])
+        else:
+            for i in range(0, len(temp1)):
+                A[i] = int(temp1[i])
+            A.reverse()
+            A.append(0)
+            A.reverse()
+        for i in range(0, len(temp2)):
+            B[i] = int(temp2[i])
+        arr1[j] = C(A, B)
+        s2 = s2[s2.find(" ") + 1:]
+        j += 1
+    temp1 = s2[0:s2.find("/")]
+    temp2 = s2[s2.find("/") + 1:len(s2)]
+    A = [0] * len(temp1)
+    B = [0] * len(temp2)
+    if temp1[0] == '-':
+        A[0] = 1
+        for i in range(1, len(temp1)):
+            A[i] = int(temp1[i])
+    else:
+        for i in range(0, len(temp1)):
+            A[i] = int(temp1[i])
+        A.reverse()
+        A.append(0)
+        A.reverse()
+    for i in range(0, len(temp2)):
+        B[i] = int(temp2[i])
+    arr1[j] = C(A, B)
     txt45 = Entry(tab4, width=20)
     txt45.grid(column=0, row=15)
+    if selected.get() == 1:
+        arr = ADD_PP_P(arr, m, arr1, n)
+        s = ''
+        for i in range(0, m + 1):
+            temp1 = arr[i][0]
+            if temp1[0] == 1:
+                s += '-'
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            else:
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            s += "/"
+            temp2 = arr[i][1]
+            for k in range(0, len(temp2)):
+                s += str(temp2[k])
+            s += ' '
+        txt45.insert(0, s)
+    elif selected.get() == 2:
+        arr = ADD_PP_P(arr, m, arr1, n)
+        s = ''
+        for i in range(0, m + 1):
+            temp1 = arr[i][0]
+            if temp1[0] == 1:
+                s += '-'
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            else:
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            s += "/"
+            temp2 = arr[i][1]
+            for k in range(0, len(temp2)):
+                s += str(temp2[k])
+            s += ' '
+        txt45.insert(0, s)
+    elif selected.get() == 3:
+        print()
+    elif selected.get() == 4:
+        print()
+    elif selected.get() == 5:
+        print()
+    elif selected.get() == 6:
+        print()
+    elif selected.get() == 7:
+        print()
+    elif selected.get() == 8:
+        print()
+    elif selected.get() == 9:
+        print()
+    elif selected.get() == 10:
+        print()
+    elif selected.get() == 11:
+        print()
+
+    elif selected.get() == 12:
+        print()
+
+
 
 
 window = Tk()
@@ -553,3 +690,4 @@ rad412.grid(column=0, row=13)
 tab_control.pack(expand=1, fill='both')
 
 window.mainloop()
+
