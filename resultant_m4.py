@@ -125,6 +125,15 @@ def MUL_Pxk_P(arr, k):
         arr.append(C([0, 0], [1]))
     return arr
 
+#P-5
+#Старший коэффициент многочлена:
+#Старший коэф это первый коэф(перед старршей степенью)
+def LED_P_Q(arr):
+    Q = list([arr[0].A, arr[0].B])
+    return Q
+
+
+
 # P-6
 # Степень многочлена
 def DEG_P_N(arr,m):
