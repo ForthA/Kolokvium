@@ -489,7 +489,7 @@ def clicked4():
             s += ' '
         txt45.insert(0, s)
     elif selected.get() == 2:
-        arr = ADD_PP_P(arr, m, arr1, n)
+        arr = SUB_PP_P(arr, m, arr1, n)
         s = ''
         for i in range(0, m + 1):
             temp1 = arr[i][0]
