@@ -471,7 +471,7 @@ def clicked4():
     txt45 = Entry(tab4, width=20)
     txt45.grid(column=0, row=15)
     if selected.get() == 1:
-        arr = ADD_PP_P(arr, m, arr1, n)
+        arr = ADD_PP_P(arr, arr1)
         s = ''
         for i in range(0, m + 1):
             temp1 = arr[i][0]
@@ -489,7 +489,7 @@ def clicked4():
             s += ' '
         txt45.insert(0, s)
     elif selected.get() == 2:
-        arr = SUB_PP_P(arr, m, arr1, n)
+        arr = SUB_PP_P(arr, arr1)
         s = ''
         for i in range(0, m + 1):
             temp1 = arr[i][0]
@@ -524,7 +524,6 @@ def clicked4():
         print()
     elif selected.get() == 11:
         print()
-
     elif selected.get() == 12:
         print()
 
@@ -690,4 +689,3 @@ rad412.grid(column=0, row=13)
 tab_control.pack(expand=1, fill='both')
 
 window.mainloop()
-
