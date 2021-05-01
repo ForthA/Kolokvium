@@ -1,4 +1,4 @@
-# N - 1 Сравнение чисел, если первое больше второго вывод - 2, если второе больше - 1,равны - 0
+# Сравнение чисел, если первое больше второго вывод - 2, если второе больше - 1,равны - 0
 def COM_NN_D(A, B):
     i = 0
     if len(A) > len(B):
@@ -16,7 +16,7 @@ def COM_NN_D(A, B):
             i += 1
 
 
-# N - 2 Проверка на ноль, если ноль - нет, если не ноль - да
+# Проверка на ноль, если ноль - нет, если не ноль - да
 def NZER_N_B(A):
     if A[0] != 0:
         return 'Да'
@@ -73,10 +73,7 @@ def ADD_NN_N(A, B):
 
 
 # N - 5 Вычитание натуральных чисел
-# Добавляем слева к B количество нулей равному разности кол-ва цифр A и B
-# Далее вычислияем разность так как же как и столбиком
 def SUB_NN_N(A, B):
-    i = 0
     if COM_NN_D(A, B) == 1:
         temp = A
         A = B
@@ -186,14 +183,14 @@ def DIV_NN_Dk(A, B, k):
             count += 1
             temp = tm.copy()
         return count - 1
-    
-    
+
+
 # N-11 Частное от деления натуральных чисел
 def DIV_NN_N(A, B):
     temp = B.copy()
     k = 0
-    while COM_NN_D(A, B) != 1: # Пока первой больше второго
-        SUB_NN_N(A, B) # Вычитаем эти числа
+    while COM_NN_D(A, B) != 1:  # Пока первой больше второго
+        SUB_NN_N(A, B)  # Вычитаем эти числа
         B = temp.copy()
         k += 1
     s = str(k)
@@ -218,9 +215,9 @@ def MOD_NN_N(A, B):
             if (count > (j + 1)) & (i > 0):
                 num3[i] = 0
                 i += 1
-        num3[i] = DIV_NN_Dk(num1[0:count], num2, 0) # Вычисляем цифру деления
+        num3[i] = DIV_NN_Dk(num1[0:count], num2, 0)  # Вычисляем цифру деления
         temp = num2.copy()
-        temp1 = SUB_NDN_N(num1[0:count], temp, num3[i]) # Вычитаем
+        temp1 = SUB_NDN_N(num1[0:count], temp, num3[i])  # Вычитаем
         num1[0:count] = temp1.copy()
         j = len(temp1)
         while num1[0] == 0:
@@ -231,7 +228,6 @@ def MOD_NN_N(A, B):
                 j -= 1
         i += 1
     return num1
-
 
 
 # N-13
@@ -249,12 +245,11 @@ def GCF_NN_N(A, B):
         A = MOD_NN_N(A, B)
         return GCF_NN_N(A, B)
 
-    
+
 # N - 14
 # НОК натуральных чисел
 # Делим произведение А и В на их НОД
 def LCM_NN_N(A, B):
     GCF = GCF_NN_N(A, B)
     MUL = MUL_NN_N(A, B)
-    return DIV_NN_N(MUL, GCF)    
-    
+    return DIV_NN_N(MUL, GCF)
