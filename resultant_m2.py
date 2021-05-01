@@ -59,131 +59,123 @@ def TRANS_Z_N(A):
 # Z-6
 # Сложение целых чисел
 def ADD_ZZ_Z(A, B):
-    result = 0
-    AZ = POZ_Z_D(A) #Определение положительности
+    AZ = POZ_Z_D(A)  # Определение положительности
     BZ = POZ_Z_D(B)
-    if ((AZ == BZ) & (AZ == 1)): #Если они оба отрицательные
+    if (AZ == BZ) & (AZ == 1):  # Если они оба отрицательные
         a = A[1:]
         b = B[1:]
-        result = ADD_NN_N(a, b) #Сложение натуральных
-        result.insert(0,0) #Добавляем ячейку для знака
-        result = MUL_ZM_Z(result) #Делаем отрицательным
-    elif ((AZ == BZ) & (AZ == 2)): #Если они оба положительны
+        result = ADD_NN_N(a, b)  # Сложение натуральных
+        result.insert(0, 0)  # Добавляем ячейку для знака
+        result = MUL_ZM_Z(result)  # Делаем отрицательным
+    elif (AZ == BZ) & (AZ == 2):  # Если они оба положительны
         a = A[1:]
         b = B[1:]
         result = ADD_NN_N(a, b)
-        result.insert(0,0)
-    elif ((AZ == BZ) & (AZ == 0)): #Если они оба равны нулю
+        result.insert(0, 0)
+    elif (AZ == BZ) & (AZ == 0):  # Если они оба равны нулю
         result = 0
-    else: #Если они разных знаков
-        a = ABS_Z_N(A) #Делаем натуральным
+    else:  # Если они разных знаков
+        a = ABS_Z_N(A)  # Делаем натуральным
         b = ABS_Z_N(B)
-        raz = COM_NN_D(a, b) #Сравниваем по величине
-        if (raz == 2): #Если первое больше второго
-            result = SUB_NN_N(a, b) #Вычитаем
-            if (AZ == 1): #Если первое отрицательное
-                result.insert(0,0)
-                result = MUL_ZM_Z(result) #Делаем отрицательным
+        raz = COM_NN_D(a, b)  # Сравниваем по величине
+        if raz == 2:  # Если первое больше второго
+            result = SUB_NN_N(a, b)  # Вычитаем
+            if AZ == 1:  # Если первое отрицательное
+                result.insert(0, 0)
+                result = MUL_ZM_Z(result)  # Делаем отрицательным
             else:
-                result.insert(0,0)
+                result.insert(0, 0)
         else:
             result = SUB_NN_N(b, a)
-            result.insert(0,0)
-            if (BZ == 1): #Если второе отрицательное
-                result = MUL_ZM_Z(result) #Делаем отрицательным
+            result.insert(0, 0)
+            if BZ == 1:  # Если второе отрицательное
+                result = MUL_ZM_Z(result)  # Делаем отрицательным
     return result
 
 
-#Z-7
-#Вычитание целых чисел
-#Рассматриваем 4 случая. Когда оба числа положительные. Если первое число больше второго, то преобразуем эти числа в натуральные и находим разность. Полученное число будет иметь знак +, иначе число будет иметь знак -
-#Когда оба числа отрицательные. Если абсолютное значение первого числа будет больше абс. знач. 2-го числа, то полученное число будет иметь знак -, иначе +
-#Первое число положительное, второе-отрицательное. В этом случае складываем числа. Полученное значение будет иметь знак +
-#Первое число отрицательное, второе-положительное. В этом случае так же складываем числа, но полученное значение будет иметь знак -.
-def SUB_ZZ_Z(A,B):
-    res=0
-    A1= POZ_Z_D(A)
+# Z-7 Вычитание целых чисел Рассматриваем 4 случая. Когда оба числа положительные. Если первое число больше второго,
+# то преобразуем эти числа в натуральные и находим разность. Полученное число будет иметь знак +, иначе число будет
+# иметь знак - Когда оба числа отрицательные. Если абсолютное значение первого числа будет больше абс. знач. 2-го
+# числа, то полученное число будет иметь знак -, иначе + Первое число положительное, второе-отрицательное. В этом
+# случае складываем числа. Полученное значение будет иметь знак + Первое число отрицательное, второе-положительное. В
+# этом случае так же складываем числа, но полученное значение будет иметь знак -.
+def SUB_ZZ_Z(A, B):
+    res = 0
+    A1 = POZ_Z_D(A)
     B1 = POZ_Z_D(B)
-    if((A1==B1) and(A1==2)):
-      a=ABS_Z_N(A)
-      b=ABS_Z_N(B)
-      res=SUB_NN_N(a,b)
-      if(COM_NN_D(a,b)==1):
-          res.insert(0,0)
-      else:
-          res.insert(0,0)
-          res=MUL_ZM_Z(res)
-    elif ((A1==B1) and (A1==1)):
-        a=ABS_Z_N(A)
-        b=ABS_Z_N(B)
-        res=SUB_NN_N(a,b)
-        if(COM_NN_D(a,b)==2):
-            res.insert(0,0)
+    if (A1 == B1) and (A1 == 2):
+        a = ABS_Z_N(A)
+        b = ABS_Z_N(B)
+        res = SUB_NN_N(a, b)
+        if COM_NN_D(a, b) == 1:
+            res.insert(0, 0)
         else:
-            res.insert(0,0)
-            res=MUL_ZM_Z(res)
-    elif ((A1==B1) and (A1==0)):
-        res=0
+            res.insert(0, 0)
+            res = MUL_ZM_Z(res)
+    elif (A1 == B1) and (A1 == 1):
+        a = ABS_Z_N(A)
+        b = ABS_Z_N(B)
+        res = SUB_NN_N(a, b)
+        if COM_NN_D(a, b) == 2:
+            res.insert(0, 0)
+        else:
+            res.insert(0, 0)
+            res = MUL_ZM_Z(res)
+    elif (A1 == B1) and (A1 == 0):
+        res = 0
     else:
-        a=ABS_Z_N(A)
-        b=ABS_Z_N(B)
-        if((A1==2) and ((B1==1) or (B1==0)) ):
-            res=ADD_NN_N(a,b)
-            
-            if(res[0]!=0):
-                res.insert(0,0)
-                
-            else:
-                res=MUL_ZM_Z(res)
-                res=MUL_ZM_Z(res)
-                
-                
-           
-            
-    
-        elif((A1==1) and ((B1==2) or (B1==0))):
-            res=ADD_NN_N(a,b)
-            
-            if(res[0]!=0):
-               res.insert(0,0)
-               res=MUL_ZM_Z(res)
-            else:
-                res=MUL_ZM_Z(res)
-                
-        elif((A1==0) and (B1==1)):
-            res=ADD_NN_N(a,b)
-            res=MUL_ZM_Z(res)
-        elif((A1==0) and (B1==2)):
-            res=ADD_NN_N(a,b)
-            
-    return res
+        a = ABS_Z_N(A)
+        b = ABS_Z_N(B)
+        if (A1 == 2) and ((B1 == 1) or (B1 == 0)):
+            res = ADD_NN_N(a, b)
 
+            if res[0] != 0:
+                res.insert(0, 0)
+
+            else:
+                res = MUL_ZM_Z(res)
+                res = MUL_ZM_Z(res)
+        elif (A1 == 1) and ((B1 == 2) or (B1 == 0)):
+            res = ADD_NN_N(a, b)
+
+            if res[0] != 0:
+                res.insert(0, 0)
+                res = MUL_ZM_Z(res)
+            else:
+                res = MUL_ZM_Z(res)
+
+        elif (A1 == 0) and (B1 == 1):
+            res = ADD_NN_N(a, b)
+            res = MUL_ZM_Z(res)
+        elif (A1 == 0) and (B1 == 2):
+            res = ADD_NN_N(a, b)
+
+    return res
 
 
 # Z-8
 # Умножение целых чисел
 def MUL_ZZ_Z(A, B):
-    result = 0
     AZ = POZ_Z_D(A)
     BZ = POZ_Z_D(B)
-    if (AZ == BZ):
+    if AZ == BZ:
         a = ABS_Z_N(A)
         b = ABS_Z_N(B)
-        result = MUL_NN_N(a,b)
+        result = MUL_NN_N(a, b)
         if result[0] == 0 and result[1] == 0:
             del result[0]
-    elif ((AZ == 0) | (BZ == 0)):
+    elif (AZ == 0) | (BZ == 0):
         result = 0
     else:
         a = ABS_Z_N(A)
         b = ABS_Z_N(B)
-        result = MUL_NN_N(a,b)
+        result = MUL_NN_N(a, b)
         if result[0] == 0 and result[1] == 0:
             del result[0]
         result = MUL_ZM_Z(result)
+    if result == 0:
+        result = [0, 0]
     return result
-
-
 
 
 # z-9 Частное от деления целых чисел
@@ -191,7 +183,7 @@ def MUL_ZZ_Z(A, B):
 def DIV_ZZ_Z(A, B):
     num1 = A
     num2 = B
-    num3 = DIV_NN_N(A[1:len(num1)],B[1:len(num2)])
+    num3 = DIV_NN_N(A[1:len(num1)], B[1:len(num2)])
     num3.reverse()
     num3.append(0)
     num3.reverse()
@@ -200,16 +192,12 @@ def DIV_ZZ_Z(A, B):
     return num3
 
 
-
-
-
-
-#Z-10
-#Остаток от деления целого на целое(делитель отличен от нуля)
-#1)При положительных числах и при делителе(B) < 0: находим частное от деления и вычитаем от A произвение частного на B
-#2)При делимом(А) < 0 и длителе(В) > 0: вычитаем из А В, чтобы при нахождении частного получить на 1 больше =>
+# Z-10
+# Остаток от деления целого на целое(делитель отличен от нуля)
+# 1)При положительных числах и при делителе(B) < 0: находим частное от деления и вычитаем от A произвение частного на B
+# 2)При делимом(А) < 0 и длителе(В) > 0: вычитаем из А В, чтобы при нахождении частного получить на 1 больше =>
 # остаток > 0
-#3)При делимом(А) < 0 и длителе(В) < 0: меняем знак у B и вычитаем из А В (-А - (В)) => получем частное на 1 больше =>
+# 3)При делимом(А) < 0 и длителе(В) < 0: меняем знак у B и вычитаем из А В (-А - (В)) => получем частное на 1 больше =>
 # остаток > 0
 def MOD_ZZ_Z(A, B):
     if ((A[0] == 0) and (B[0] == 1)) or ((A[0] == 0) and (B[0] == 0)):
