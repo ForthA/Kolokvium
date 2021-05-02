@@ -225,32 +225,20 @@ def DIV_NN_N(A, B):
 
 # N-12 Остаток от деления
 def MOD_NN_N(A, B):
-    i = 0
-    j = 0
+    temp1 = A.copy()
+    temp2 = B.copy()
+    tempD1 = A.copy()
+    tempD2 = B.copy()
+    res = [0] * (DIV_NN_Dk(tempD1, tempD2)[1] + 1)
+    while COM_NN_D(temp1, temp2) != 1:
+        a, b = DIV_NN_Dk(temp1, temp2)
+        print(temp1)
+        res[b] = a
+        c = MUL_Nk_N(temp2, b)
+        temp2 = B.copy()
+        temp1 = SUB_NDN_N(temp1, c, a)
+    return temp1
 
-    num1 = A.copy()
-    num2 = B.copy()
-    num3 = [0] * len(A)
-    while COM_NN_D(num1, num2) != 1:  # Пока первое больше второго
-        count = 0
-        while COM_NN_D(num1[0:count], num2) == 1:  # Сколько цифр в числе должны взять для вычитания
-            count += 1
-            if (count > (j + 1)) & (i > 0):
-                num3[i] = 0
-                i += 1
-        num3[i] = DIV_NN_Dk(num1[0:count], num2, 0)  # Вычисляем цифру деления
-        temp = num2.copy()
-        temp1 = SUB_NDN_N(num1[0:count], temp, num3[i])  # Вычитаем
-        num1[0:count] = temp1.copy()
-        j = len(temp1)
-        while num1[0] == 0:
-            if len(num1) == 1:
-                break
-            else:
-                num1.remove(0)
-                j -= 1
-        i += 1
-    return num1
 
 
 # N-13
