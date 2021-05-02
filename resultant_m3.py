@@ -75,7 +75,7 @@ def ADD_QQ_Q(A, B, C, D):
     sum1 = MUL_ZZ_Z(A, TRANS_N_Z(D))
     sum2 = MUL_ZZ_Z(TRANS_N_Z(B), C)
     temp = ADD_ZZ_Z(sum1, sum2)
-    return temp, sum3
+    return RED_Q_Q([temp, sum3])
 
 
 # Q-6
@@ -99,7 +99,7 @@ def SUB_QQ_Q(Q01, Q02):
     numeratorB = MUL_ZZ_Z(DIV_ZZ_Z(NOK, B2), B1)
     del NOK[0]
     Q = [SUB_ZZ_Z(numeratorA, numeratorB), NOK]
-    return Q
+    return RED_Q_Q(Q)
 
 
 # Q-7
@@ -122,7 +122,7 @@ def MUL_QQ_Q(Q01, Q02):
 
     B = TRANS_Z_N(B)
     Q = [A, B]
-    return Q
+    return RED_Q_Q(Q)
 
 
 # Q-8
@@ -138,6 +138,4 @@ def DIV_QQ_Q(A, B, C, D):
         numer[0] = 0
     elif (numer[0] == 0) & (temp == 1):
         numer[0] = 1
-    return numer, denom
-
-
+    return RED_Q_Q([numer, denom])
