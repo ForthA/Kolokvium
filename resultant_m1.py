@@ -166,38 +166,61 @@ def SUB_NDN_N(A, B, n):
         return A
     else:
         return "error in SUB_NDN_N"
-
-
 # N-10
 # Вычисление первой цифры деления, умноженное на 10^k, k - позиция этой цифры.
 # Преобразование массивов в числа, перемещение большего числа на первое место,
 # нахождение самого числа, ее позиции и результата.
-def DIV_NN_Dk(A, B, k):
+def DIV_NN_Dk(A, B):
     count = 1
+    if COM_NN_D(A, B) == 0:
+        return 1, 0
     if COM_NN_D(A, B) == 1:
-        return 0
+        big = B
+        small = A
     else:
-        tm = MUL_Nk_N(B, k)
-        temp = tm.copy()
-        while COM_NN_D(A, MUL_ND_N(temp, count)) != 1:
-            count += 1
-            temp = tm.copy()
-        return count - 1
+        big = A
+        small = B
+    k = 0
+    n3 = small
+    tm = small.copy()
+    while COM_NN_D(big, n3) == 2:
+        k += 1
+        n3 = MUL_Nk_N(tm, k)
+        tm = small.copy()
+    k -= 1
+    tm = small.copy()
+    n3 = MUL_Nk_N(tm, k)
+    small = n3
+    tm = small.copy()
+    while COM_NN_D(big, n3) == 2:
+        count += 1
+        n3 = MUL_ND_N(tm, count)
+        tm = small.copy()
+    if COM_NN_D(big, n3) != 0:
+        count -= 1
+    if count == 10:
+        count = 1
+        k += 1
+    return count, k
 
 
 # N-11 Частное от деления натуральных чисел
 def DIV_NN_N(A, B):
-    temp = B.copy()
-    k = 0
-    while COM_NN_D(A, B) != 1:  # Пока первой больше второго
-        SUB_NN_N(A, B)  # Вычитаем эти числа
-        B = temp.copy()
-        k += 1
-    s = str(k)
-    count = [0] * len(s)
-    for i in range(0, len(s)):
-        count[i] = int(s[i])
-    return count
+    temp1 = A.copy()
+    temp2 = B.copy()
+    tempD1 = A.copy()
+    tempD2 = B.copy()
+    res = [0] * (DIV_NN_Dk(tempD1, tempD2)[1] + 1)
+    while COM_NN_D(temp1, temp2) != 1:
+        a, b = DIV_NN_Dk(temp1, temp2)
+        print(temp1)
+        res[b] = a
+        c = MUL_Nk_N(temp2, b)
+        temp2 = B.copy()
+        temp1 = SUB_NDN_N(temp1, c, a)
+    res.reverse()
+    return res
+
 
 
 # N-12 Остаток от деления
