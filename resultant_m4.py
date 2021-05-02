@@ -182,6 +182,28 @@ def FAC_P_Q(arr):
     return TRANS_N_Z(nod), nok
 
 
+# P-8
+def MUL_PP_P(arr1, arr2):
+    m = DEG_P_N(arr1)
+    n = DEG_P_N(arr2)
+    deg = m + n + 1
+    res = [C] * deg
+    for i in range(0, deg):
+        res[i] = C([0, 0], [1])
+
+    for i in range(0, n + 1):
+        for j in range(0, m + 1):
+            resDeg = i + j
+            frac1 = [arr1[j].A, arr1[j].B]
+            frac2 = [arr2[i].A, arr2[i].B]
+            mul = MUL_QQ_Q(frac2, frac1)
+            numerR = res[resDeg].A
+            demonR = res[resDeg].B
+            numerM = mul[0]
+            demonM = mul[1]
+            res[resDeg].A, res[resDeg].B = ADD_QQ_Q(numerR, demonR, numerM, demonM)
+    return res
+
 # P-12
 # Производная многочлена
 # m - степень переводим в список, т.к степнь может быть числом(для олее простого умножения)
