@@ -73,7 +73,7 @@ def SUB_PP_P(arr, arr1):
                     array2.append(arr1[i - raz].A)
                     array2.append(arr1[i - raz].B)
                     Q = SUB_QQ_Q(array1, array2)
-                    arr1[i] = C(Q[0], Q[1])
+                    arr[i] = C(Q[0], Q[1])
                 else:
                     array1.clear()
                     array2.clear()
@@ -82,7 +82,7 @@ def SUB_PP_P(arr, arr1):
                     array2.append(arr1[i - raz].A)
                     array2.append(arr1[i - raz].B)
                     Q = SUB_QQ_Q(array1, array2)
-                    arr1[i] = C(Q[0], Q[1])
+                    arr[i] = C(Q[0], Q[1])
 
         return arr
 
