@@ -213,7 +213,6 @@ def DIV_NN_N(A, B):
     res = [0] * (DIV_NN_Dk(tempD1, tempD2)[1] + 1)
     while COM_NN_D(temp1, temp2) != 1:
         a, b = DIV_NN_Dk(temp1, temp2)
-        print(temp1)
         res[b] = a
         c = MUL_Nk_N(temp2, b)
         temp2 = B.copy()
@@ -232,7 +231,6 @@ def MOD_NN_N(A, B):
     res = [0] * (DIV_NN_Dk(tempD1, tempD2)[1] + 1)
     while COM_NN_D(temp1, temp2) != 1:
         a, b = DIV_NN_Dk(temp1, temp2)
-        print(temp1)
         res[b] = a
         c = MUL_Nk_N(temp2, b)
         temp2 = B.copy()
