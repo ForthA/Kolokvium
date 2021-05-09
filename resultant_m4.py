@@ -119,9 +119,8 @@ def SUB_PP_P(arr, arr1):
 
         return arr1
 
-    # P - 3
 
-
+# P - 3
 # Умножение коэфа с многочленом
 def MUL_PQ_P(arr, D):
     for i in range(0, len(arr)):
@@ -133,9 +132,7 @@ def MUL_PQ_P(arr, D):
 # Умножение многочлена на x^k
 # Добавляем элементы [0, 0],[0], чтобы понимать сколько до конца многочлена
 def MUL_Pxk_P(arr0, k):
-    #Измененная часть + изменено имя параметра arr->arr0
     arr = arr0[:]
-    #----------------
     for i in range(0, k):
         arr.append(C([0, 0], [1]))
     return arr
@@ -207,6 +204,7 @@ def MUL_PP_P(arr1, arr2):
             res[resDeg].A, res[resDeg].B = ADD_QQ_Q(numerR, demonR, numerM, demonM)
     return res
 
+
 # P-9
 # Частное от деления многочлена на многочлен при делении с остатком:
 # Коэф делимого делим на старший коэф делителя -> получаем нужный коэф частного
@@ -244,14 +242,51 @@ def DIV_PP_P(arr01, arr02):
             tmp = MUL_Pxk_P(arr2, ansSt - i)
             arrSUB = MUL_PQ_P(tmp, ans[i])  # Вычитаемый многочлен
 
-            for j in range(len(arrSUB)):    #Костыль. Для правильной работы SUB_PP_P
-                if arrSUB[j].A[1]==0:
+            for j in range(len(arrSUB)):  # Костыль. Для правильной работы SUB_PP_P
+                if arrSUB[j].A[1] == 0:
                     arrSUB[j].A[0] = 1
 
             arr1 = SUB_PP_P(arr1, arrSUB)
             arr1.pop(0)
 
     return ans
+
+
+# P-10
+# Остаток от деления многочлена на многочлен при делении с остатком
+def MOD_PP_P(arr, arr1):
+    chas = DIV_PP_P(arr, arr1)  # Находим частное от деления двух многочленов
+    k = MUL_PP_P(chas, arr1)  # Произведение частногоь на второй многочлен
+    res = SUB_PP_P(arr, k)  # Вычитаем из первого исходного многочлена произведение частного на второй
+    return res
+
+
+# P-11 НОД многочленов Если степень 1-го многочлена меньше второго (m<n), то создаем два массива, где присваиваем
+# arr2 присваиваем arr1-это второй многочлен, arr3 присваиваем arr-это первый многочлен Находим остаток от деления
+# двух многочленов Пока степень полученного многочлена больше нуля, то к arr2 присваиваем arr3, а к arr3 остаток,
+# исли остаток равен нулю, то выводим arr3
+def GCF_PP_P(arr, arr1):
+    m = DEG_P_N(arr)
+    n = DEG_P_N(arr1)
+    if n > m:
+        arr2 = arr1
+        arr3 = arr
+        r = MOD_PP_P(arr2, arr3)
+        while DEG_P_N(r) > 0:
+            arr2 = arr3
+            arr3 = r
+            r = MOD_PP_P(arr2, arr3)
+        return arr3
+    else:
+        arr2 = arr
+        arr3 = arr1
+        r = MOD_PP_P(arr3, arr2)
+        while DEG_P_N(r) > 0:
+            arr3 = arr2
+            arr2 = r
+            r = MOD_PP_P(arr3, arr2)
+        return arr2
+
 
 # P-12
 # Производная многочлена
@@ -278,66 +313,3 @@ def DER_P_P(arr):
         arr[i].A = section
         result = SUB_NN_N(result, [1])
     return arr
-
-
-'''#P-10
-#Остаток от деления многочлена на многочлен при делении с остатком
-def MOD_PP_P(arr,m, arr1,n):
-    chas = DIV_PP_P(arr,m, arr1,n) #Находим частное от деления двух многочленов 
-    k = MUL_PP_P(chas, arr1) #Произведение частногоь на второй многочлен
-    res = SUB_PP_P(arr, m, k, n) #Вычитаем из первого исходного многочлена произведение частного на второй
-    return res
-
-#P-11
-#НОД многочленов
-#Если степень 1-го многочлена меньше второго (m<n), то создаем два массива, где присваиваем arr2 присваиваем arr1-это второй многочлен, arr3 присваиваем arr-это первый многочлен
-#Находим остаток от деления двух многочленов
-#Пока степень полученного многочлена больше нуля, то к arr2 присваиваем arr3, а к arr3 остаток, исли остаток равен нулю, то выводим arr3 
-def GCF_PP_P(arr,m,arr1,n):
-    if(m<n):
-        arr2=[C]*(n+1)
-        arr2=arr1
-        arr3=[C]*(m+1)
-        arr3=arr
-        r=MOD_PP_P(arr2,n,arr3,m)
-        while(DEG_P_N(r,(n-m))>0):
-            arr2=arr3
-            arr3=r
-        return arr3
-            r=MOD_PP_P(arr2,n,arr3,m)
-    else:
-        arr2=[C]*(m+1)
-        arr2=arr
-        arr3=[C]*(n+1)
-        arr3=arr1
-        r=MOD_PP_P(arr3,m,arr2,n)
-        while(DEG_P_N(r,(n-m))>0):
-            arr3=arr2
-            arr2=r
-            r=MOD_PP_P(arr3,m,arr2,n)
-        return arr2
-
-# P-12
-# Производная многочлена
-# m - степень переводим в список, т.к степнь может быть числом(для олее простого умножения)
-# забираем знак у числителя и умножаем его на степень
-# del result[len(result)-1] нужен для удаления нуля в конце после функции MUL_NN_N
-# Возвращаем знак числителю и минусуем 1 от степени
-def DER_P_P(arr, m):
-    tmp = m
-    result = []
-    while m > 0:
-        result.append(m % 10)
-        m //= 10
-    result.reverse()
-    for i in range(0, tmp):
-        sign = arr[i].A[0]
-        del arr[i].A[0]
-        section = MUL_NN_N(arr[i].A, result)
-        del result[len(result)-1]
-        section.reverse()
-        section.append(sign)
-        section.reverse()
-        arr[i].A = section
-        result = SUB_NN_N(result, [1])
-    return arr '''
