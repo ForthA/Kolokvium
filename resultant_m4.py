@@ -132,7 +132,10 @@ def MUL_PQ_P(arr, D):
 # P-4
 # Умножение многочлена на x^k
 # Добавляем элементы [0, 0],[0], чтобы понимать сколько до конца многочлена
-def MUL_Pxk_P(arr, k):
+def MUL_Pxk_P(arr0, k):
+    #Измененная часть + изменено имя параметра arr->arr0
+    arr = arr0[:]
+    #----------------
     for i in range(0, k):
         arr.append(C([0, 0], [1]))
     return arr
@@ -203,6 +206,52 @@ def MUL_PP_P(arr1, arr2):
             demonM = mul[1]
             res[resDeg].A, res[resDeg].B = ADD_QQ_Q(numerR, demonR, numerM, demonM)
     return res
+
+# P-9
+# Частное от деления многочлена на многочлен при делении с остатком:
+# Коэф делимого делим на старший коэф делителя -> получаем нужный коэф частного
+# Вычитаем из делимого нужный многочлен
+# Повторяем нужное кол-во раз
+def DIV_PP_P(arr01, arr02):
+    # Коэфы многочленов
+    arr1 = arr01[:]
+    arr2 = arr02[:]
+
+    # Степень многочленов
+    st1 = DEG_P_N(arr1)
+    st2 = DEG_P_N(arr2)
+
+    if st1 < st2:
+        return [[[0, 0], [1]]]  # Нулевой многочлен
+    else:
+        # Степень и кол-во коэфов частного
+        ansSt = st1 - st2
+        ansLen = ansSt + 1
+
+        # Инициализация частного(все коэфы 0)
+        ans = [C] * (ansLen)
+        for i in range(ansLen):
+            ans[i].A = [0, 0]
+            ans[i].B = [1]
+
+        Q1 = arr2[0].A[:]
+        Q2 = arr2[0].B[:]  # Старший коэф делителя
+        # Расчет частного
+        for i in range(ansLen):
+            tmp = DIV_QQ_Q(arr1[0].A, arr1[0].B, Q1, Q2)
+            ans[i] = C(tmp[0], tmp[1])  # Коэф частного
+
+            tmp = MUL_Pxk_P(arr2, ansSt - i)
+            arrSUB = MUL_PQ_P(tmp, ans[i])  # Вычитаемый многочлен
+
+            for j in range(len(arrSUB)):    #Костыль. Для правильной работы SUB_PP_P
+                if arrSUB[j].A[1]==0:
+                    arrSUB[j].A[0] = 1
+
+            arr1 = SUB_PP_P(arr1, arrSUB)
+            arr1.pop(0)
+
+    return ans
 
 # P-12
 # Производная многочлена
