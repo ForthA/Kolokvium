@@ -10,6 +10,8 @@ from tkinter.ttk import Radiobutton
 def clicked():
     s1 = txt11.get()
     s2 = txt12.get()
+    c = int(s1)
+    r = int(s2)
     A = [0] * len(s1)
     B = [0] * len(s2)
     txt13 = Entry(tab1, width=20)
@@ -71,17 +73,17 @@ def clicked():
             s += str(temp[i])
         txt13.insert(0, s)
     elif selected.get() == 10:
-        temp = DIV_NN_Dk(A, B, 0)
+        temp = DIV_NN_Dk(A, B)
 
         txt13.insert(0, str(temp))
     elif selected.get() == 11:
         temp = DIV_NN_N(A, B)
         print(temp)
+        print(c/r)
         s = ''
         for i in range(0, len(temp)):
             s += str(temp[i])
         txt13.insert(0, s)
-
     elif selected.get() == 12:
         temp = MOD_NN_N(A, B)
         s = ''
@@ -492,7 +494,7 @@ def clicked4():
         arr = SUB_PP_P(arr, arr1)
         s = ''
         for i in range(0, m + 1):
-            temp1 = arr[i][0]
+            temp1 = arr[i].A
             if temp1[0] == 1:
                 s += '-'
                 for j in range(1, len(temp1)):
@@ -501,7 +503,7 @@ def clicked4():
                 for j in range(1, len(temp1)):
                     s += str(temp1[j])
             s += "/"
-            temp2 = arr[i][1]
+            temp2 = arr[i].B
             for k in range(0, len(temp2)):
                 s += str(temp2[k])
             s += ' '
@@ -515,17 +517,119 @@ def clicked4():
     elif selected.get() == 6:
         print()
     elif selected.get() == 7:
-        print()
+        temp1, temp2 = FAC_P_Q(arr)
+        s = ""
+        s1 = ""
+        if temp1[0] == 1:
+            s += '-'
+            for i in range(1, len(temp1)):
+                s += str(temp1[i])
+        else:
+            for i in range(1, len(temp1)):
+                s += str(temp1[i])
+        for i in range(0, len(temp2)):
+            s1 += str(temp2[i])
+        txt45.insert(0, s + " " + s1)
     elif selected.get() == 8:
-        print()
+        arr = MUL_PP_P(arr, arr1)
+        s = ''
+        for i in range(0, len(arr)):
+            temp1 = arr[i].A
+            print(temp1)
+            if temp1[0] == 1:
+                s += '-'
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            else:
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            s += "/"
+            temp2 = arr[i].B
+            print(temp2)
+            for k in range(0, len(temp2)):
+                s += str(temp2[k])
+            s += ' '
+        txt45.insert(0, s)
     elif selected.get() == 9:
-        print()
+        arr = DIV_PP_P(arr, arr1)
+        s = ''
+        for i in range(0, len(arr)):
+            temp1 = arr[i].A
+            print(temp1)
+            if temp1[0] == 1:
+                s += '-'
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            else:
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            s += "/"
+            temp2 = arr[i].B
+            print(temp2)
+            for k in range(0, len(temp2)):
+                s += str(temp2[k])
+            s += ' '
+        txt45.insert(0, s)
     elif selected.get() == 10:
-        print()
+        arr = MOD_PP_P(arr, arr1)
+        s = ''
+        for i in range(0, len(arr)):
+            temp1 = arr[i].A
+            print(temp1)
+            if temp1[0] == 1:
+                s += '-'
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            else:
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            s += "/"
+            temp2 = arr[i].B
+            print(temp2)
+            for k in range(0, len(temp2)):
+                s += str(temp2[k])
+            s += ' '
+        txt45.insert(0, s)
     elif selected.get() == 11:
-        print()
+        arr = GCF_PP_P(arr, arr1)
+        s = ''
+        for i in range(0, len(arr)):
+            temp1 = arr[i][0]
+            print(temp1)
+            if temp1[0] == 1:
+                s += '-'
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            else:
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            s += "/"
+            temp2 = arr[i][1]
+            print(temp2)
+            for k in range(0, len(temp2)):
+                s += str(temp2[k])
+            s += ' '
+        txt45.insert(0, s)
     elif selected.get() == 12:
-        print()
+        arr = DER_P_P(arr)
+        s = ''
+        for i in range(0, len(arr) - 1):
+            temp1 = arr[i].A
+            print(temp1)
+            if temp1[0] == 1:
+                s += '-'
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            else:
+                for j in range(1, len(temp1)):
+                    s += str(temp1[j])
+            s += "/"
+            temp2 = arr[i].B
+            print(temp2)
+            for k in range(0, len(temp2)):
+                s += str(temp2[k])
+            s += ' '
+        txt45.insert(0, s)
 
 
 
@@ -561,20 +665,20 @@ txt43 = Entry(tab4, width=20)
 txt44 = Entry(tab4, width=20)
 
 # Модуль 1
-rad11 = Radiobutton(tab1, text='N - 1', value=1, variable=selected)
-rad12 = Radiobutton(tab1, text='N - 2', value=2, variable=selected)
-rad13 = Radiobutton(tab1, text='N - 3', value=3, variable=selected)
-rad14 = Radiobutton(tab1, text='N - 4', value=4, variable=selected)
-rad15 = Radiobutton(tab1, text='N - 5', value=5, variable=selected)
-rad16 = Radiobutton(tab1, text='N - 6', value=6, variable=selected)
-rad17 = Radiobutton(tab1, text='N - 7', value=7, variable=selected)
-rad18 = Radiobutton(tab1, text='N - 8', value=8, variable=selected)
-rad19 = Radiobutton(tab1, text='N - 9', value=9, variable=selected)
-rad110 = Radiobutton(tab1, text='N - 10', value=10, variable=selected)
-rad111 = Radiobutton(tab1, text='N - 11', value=11, variable=selected)
-rad112 = Radiobutton(tab1, text='N - 12', value=12, variable=selected)
-rad113 = Radiobutton(tab1, text='N - 13', value=13, variable=selected)
-rad114 = Radiobutton(tab1, text='N - 14', value=14, variable=selected)
+rad11 = Radiobutton(tab1, text='Сравнение чисел, если первое больше второго вывод - 2, если второе больше - 1,равны - 0', value=1, variable=selected)
+rad12 = Radiobutton(tab1, text='Проверка на ноль', value=2, variable=selected)
+rad13 = Radiobutton(tab1, text='Добавление 1 к натуральному числу', value=3, variable=selected)
+rad14 = Radiobutton(tab1, text='Сложение натуральных чисел', value=4, variable=selected)
+rad15 = Radiobutton(tab1, text='Вычитание натуральных чисел', value=5, variable=selected)
+rad16 = Radiobutton(tab1, text='Умножение натурального числа на цифру', value=6, variable=selected)
+rad17 = Radiobutton(tab1, text='Умножение на 10^k', value=7, variable=selected)
+rad18 = Radiobutton(tab1, text='Умножение натуральных чисел', value=8, variable=selected)
+rad19 = Radiobutton(tab1, text='Вычитание из натурального другого натурального, умноженного на цифру', value=9, variable=selected)
+rad110 = Radiobutton(tab1, text='Вычисление первой цифры деления', value=10, variable=selected)
+rad111 = Radiobutton(tab1, text='Частное от деления натуральных чисел', value=11, variable=selected)
+rad112 = Radiobutton(tab1, text='Остаток от деления', value=12, variable=selected)
+rad113 = Radiobutton(tab1, text='НОД натуральных чисел', value=13, variable=selected)
+rad114 = Radiobutton(tab1, text='НОК натуральных чисел', value=14, variable=selected)
 
 # Модуль 2
 rad21 = Radiobutton(tab2, text='Z - 1', value=1, variable=selected)
@@ -613,78 +717,78 @@ rad411 = Radiobutton(tab4, text='P - 11', value=11, variable=selected)
 rad412 = Radiobutton(tab4, text='P - 12', value=12, variable=selected)
 
 # Модуль 1 - вывод кнопки и текста
-txt11.grid(column=0, row=0)
-txt12.grid(column=1, row=0)
-btn1.grid(column=3, row=0)
+txt11.grid(column=0, row=0, sticky=W)
+txt12.grid(column=1, row=0, sticky=W)
+btn1.grid(column=2, row=0, sticky=W)
 
 # Модуль 1 - вывод Radio
-rad11.grid(column=0, row=1)
-rad12.grid(column=0, row=2)
-rad13.grid(column=0, row=3)
-rad14.grid(column=0, row=4)
-rad15.grid(column=0, row=5)
-rad16.grid(column=0, row=6)
-rad17.grid(column=0, row=7)
-rad18.grid(column=0, row=8)
-rad19.grid(column=0, row=9)
-rad110.grid(column=0, row=10)
-rad111.grid(column=0, row=11)
-rad112.grid(column=0, row=12)
-rad113.grid(column=0, row=13)
-rad114.grid(column=0, row=14)
+rad11.grid(column=0, row=1, sticky=W)
+rad12.grid(column=0, row=2, sticky=W)
+rad13.grid(column=0, row=3, sticky=W)
+rad14.grid(column=0, row=4, sticky=W)
+rad15.grid(column=0, row=5, sticky=W)
+rad16.grid(column=0, row=6, sticky=W)
+rad17.grid(column=0, row=7, sticky=W)
+rad18.grid(column=0, row=8, sticky=W)
+rad19.grid(column=0, row=9, sticky=W)
+rad110.grid(column=0, row=10, sticky=W)
+rad111.grid(column=0, row=11, sticky=W)
+rad112.grid(column=0, row=12, sticky=W)
+rad113.grid(column=0, row=13, sticky=W)
+rad114.grid(column=0, row=14, sticky=W)
 
 # Модуль 2 - вывод кнопки и текста
-txt21.grid(column=0, row=0)
-txt22.grid(column=1, row=0)
-btn2.grid(column=3, row=0)
+txt21.grid(column=0, row=0, sticky=W)
+txt22.grid(column=1, row=0, sticky=W)
+btn2.grid(column=3, row=0, sticky=W)
 
 # Модуль 2 - вывод Radio
-rad21.grid(column=0, row=1)
-rad22.grid(column=0, row=2)
-rad23.grid(column=0, row=3)
-rad24.grid(column=0, row=4)
-rad25.grid(column=0, row=5)
-rad26.grid(column=0, row=6)
-rad27.grid(column=0, row=7)
-rad28.grid(column=0, row=8)
-rad29.grid(column=0, row=9)
-rad210.grid(column=0, row=10)
+rad21.grid(column=0, row=1, sticky=W)
+rad22.grid(column=0, row=2, sticky=W)
+rad23.grid(column=0, row=3, sticky=W)
+rad24.grid(column=0, row=4, sticky=W)
+rad25.grid(column=0, row=5, sticky=W)
+rad26.grid(column=0, row=6, sticky=W)
+rad27.grid(column=0, row=7, sticky=W)
+rad28.grid(column=0, row=8, sticky=W)
+rad29.grid(column=0, row=9, sticky=W)
+rad210.grid(column=0, row=10, sticky=W)
 
 # Модуль 3 - вывод Кнопки и текста
-txt31.grid(column=0, row=0)
-txt32.grid(column=1, row=0)
-btn3.grid(column=3, row=0)
+txt31.grid(column=0, row=0, sticky=W)
+txt32.grid(column=1, row=0, sticky=W)
+btn3.grid(column=3, row=0, sticky=W)
 
 # Модуль 3 - вывод Radio
-rad31.grid(column=0, row=1)
-rad32.grid(column=0, row=2)
-rad33.grid(column=0, row=3)
-rad34.grid(column=0, row=4)
-rad35.grid(column=0, row=5)
-rad36.grid(column=0, row=6)
-rad37.grid(column=0, row=7)
-rad38.grid(column=0, row=8)
+rad31.grid(column=0, row=1, sticky=W)
+rad32.grid(column=0, row=2, sticky=W)
+rad33.grid(column=0, row=3, sticky=W)
+rad34.grid(column=0, row=4, sticky=W)
+rad35.grid(column=0, row=5, sticky=W)
+rad36.grid(column=0, row=6, sticky=W)
+rad37.grid(column=0, row=7, sticky=W)
+rad38.grid(column=0, row=8, sticky=W)
 
 # Модуль 4 - вызов кнопки и текста
-txt41.grid(column=0, row=0)
-txt42.grid(column=1, row=0)
-txt43.grid(column=0, row=1)
-txt44.grid(column=1, row=1)
-btn4.grid(column=3, row=0)
+txt41.grid(column=0, row=0, sticky=W)
+txt42.grid(column=1, row=0, sticky=W)
+txt43.grid(column=0, row=1, sticky=W)
+txt44.grid(column=1, row=1, sticky=W)
+btn4.grid(column=3, row=0, sticky=W)
 
 # Модуль 4 - вызов Radio
-rad41.grid(column=0, row=2)
-rad42.grid(column=0, row=3)
-rad43.grid(column=0, row=4)
-rad44.grid(column=0, row=5)
-rad45.grid(column=0, row=6)
-rad46.grid(column=0, row=7)
-rad47.grid(column=0, row=8)
-rad48.grid(column=0, row=9)
-rad49.grid(column=0, row=10)
-rad410.grid(column=0, row=11)
-rad411.grid(column=0, row=12)
-rad412.grid(column=0, row=13)
+rad41.grid(column=0, row=2, sticky=W)
+rad42.grid(column=0, row=3, sticky=W)
+rad43.grid(column=0, row=4, sticky=W)
+rad44.grid(column=0, row=5, sticky=W)
+rad45.grid(column=0, row=6, sticky=W)
+rad46.grid(column=0, row=7, sticky=W)
+rad47.grid(column=0, row=8, sticky=W)
+rad48.grid(column=0, row=9, sticky=W)
+rad49.grid(column=0, row=10, sticky=W)
+rad410.grid(column=0, row=11, sticky=W)
+rad411.grid(column=0, row=12, sticky=W)
+rad412.grid(column=0, row=13, sticky=W)
 
 tab_control.pack(expand=1, fill='both')
 
