@@ -1,6 +1,6 @@
 FROM python:3.10
 
 WORKDIR /code
-COPY ..
+COPY . .
 
 CMD [ "python", "main.py" ]
